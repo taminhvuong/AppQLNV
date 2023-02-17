@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "D:/Visual Studio Code/html_css"
+		},
+		{
+			"path": "D:/Visual Studio Code/Assignment2"
+		},
+		{
+			"path": "D:/Visual Studio Code/js"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "html_css"
+	}
+}

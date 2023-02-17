@@ -1,0 +1,218 @@
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2>Department <b>View List</b></h2>
+                </div>
+                <div class="col-sm-12" style="padding-bottom: 20px;">
+                    <button style="float: right;" type="button" data-toggle="modal" title="Add New"
+                        onclick="openAddDepartmentModal()"><i class="fa fa-plus"></i></button>
+                    <button style="float: right;" type="button" data-toggle="modal" title="Delete"
+                        onclick="deleteAllDepartment()"><i class="fa fa-trash"></i> </button>
+                    <button style="float: right;" type="button" data-toggle="modal" title="Refresh"
+                        onclick="refreshDepartment()"> <i class="fa fa-refresh" aria-hidden="true"></i> </button>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" onkeyup="handelKeyUpForSearchDepartment(event)" id="inputSearchDepartment"
+                        placeholder="Search for name.." title="Type in a name">
+                </div>
+
+                <div class="col-sm-1">
+                    <button style="margin-top:15px ;" type="button" data-toggle="modal" title="Search"
+                        onclick="searchHandelDepartment()"> <i class="fa fa-search"></i></button>
+
+                </div>
+                <div class="col-sm-2">
+                    <label for="filterType"><b>Type</b></label><br>
+                    <select name="filterType" id="filterType">
+                        <option selected="selected" value="">--Mời chọn--</option>
+                        <option value="DEV">DEV</option>
+                        <option value="TEST">TEST</option>
+                        <option value="SCRUM_MASTER">SCRUM-MASTER</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+                <div class="col-sm-5">
+
+                    <label style="margin-left:50px" for="inputFilterCreatedDateMin"><b>Created Date</b></label>
+                    <input type="date" id="inputFilterCreatedDateMin" title="Type in a create_date">
+
+                    <label style="margin-left:50px" for="inputFilterCreatedDateMax"><b>Created Date</b></label>
+
+                    <input type="date" id="inputFilterCreatedDateMax" placeholder="Search for name.."
+                        title="Type in a create_date">
+
+                </div>
+                <div class="col-sm-1">
+
+                    <button style="float: left;    margin-top: 15px;" type="button" data-toggle="modal"
+                        onclick="filterDepartment()"><i class="fa fa-filter"></i>
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 50px;"><input type="checkbox" id="checkbox-all-department"
+                            name="check-deleteAll-department" onclick="onChangeCheckboxAllDepartment()"></th>
+
+                    <th>Name <i class="fa fa-fw" id="nameiconsort" onclick="changeSortDepartment('name')"></i></th>
+                    <th>Total Member <i class="fa fa-fw" id="totalMembericonsort"
+                            onclick="changeSortDepartment('totalMember')"> </i></th>
+                    <th>Create Date <i class="fa fa-fw" id="created_dateiconsort"
+                            onclick="changeSortDepartment('createdDate')"></i></th>
+                    <th>Type <i class="fa fa-fw" id="typeiconsort" onclick="changeSortDepartment('type')"></i></th>
+                    <th style="width:120px;"> Actions</th>
+                </tr>
+            </thead>
+            <tbody id="getlist">
+                <!-- <tr>
+                    <td>John Doe</td>
+                    <td>Administration</td>
+                    <td>(171) 555-2222</td>
+                    <td>
+                        <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                        <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                        <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Peter Parker</td>
+                    <td>Customer Service</td>
+                    <td>(313) 555-5735</td>
+                    <td>
+                        <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                        <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                        <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Fran Wilson</td>
+                    <td>Human Resources</td>
+                    <td>(503) 555-9931</td>
+                    <td>
+                        <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                        <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                        <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+        <nav style="text-align: end ;font-size: 0.7em; " aria-label="Page navigation example">
+            <ul class="pagination" id="paginationDepartments">
+                <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+            </ul>
+        </nav>
+    </div>
+ <!-- getLissAccountTo ADD Department -->
+ <div id="myModalAddAccount" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- header -->
+            <div class="modal-header">
+                <h5 class="modal-title" >Add Account inTo <span id="nameInto"> Department</span></h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- body -->
+            <div class="modal-body">
+                <div class="modal-container">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;"><input type="checkbox"  name="check-deleteAll"
+                                        ></th>
+                                <th>Username </th>
+                                <!-- https://stackoverflow.com/questions/25131336/how-to-show-bootstrap-table-with-sort-icon-->
+            
+                                <th>FullName</th>
+            
+                                <th>Role </th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+
+                        </tbody>
+                    </table>  
+
+                </div>
+
+            </div>
+
+
+            <!-- footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveAccount()">Save</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Department</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body">
+                    <div class="modal-container">
+
+                        <input type="hidden" id="id" name="id">
+
+                        <label for="name"><b>Name</b></label>
+                        <input type="text" placeholder="Enter Name" name="name" id="name" required>
+                        <p id="checkName" style="color: red;"></p>
+
+
+                        <label for="create_date" id="label-create_date"><b>Create Date</b></label>
+                        <input type="date" placeholder="Enter Department" name="create_date" id="create_date" readonly
+                            required><br>
+
+                        <label for="typeDepartment"><b>Type</b></label>
+                        <select name="typeDepartment" id="typeDepartment">
+                            <option selected="selected" value="" disabled="disabled">--Mời lựa chọn--</option>
+                            <option value="DEV">DEV</option>
+                            <option value="TEST">TEST</option>
+                            <option value="SCRUM_MASTER">SCRUM-MASTER</option>
+                            <option value="PM">PM</option>
+                        </select>
+                        <p id="checkType" style="color: red;"></p>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- success alert -->
+    <div class="alert alert-success" id="success-alert" style="display: none;">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Success! </strong>
+    </div>
+</div>
