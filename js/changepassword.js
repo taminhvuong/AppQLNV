@@ -75,7 +75,7 @@ function savePassword() {
                 
             });
 
-            window.location.replace("http://127.0.0.1:5500/DepartmentManagement/html/program.html");
+            window.location.replace("http://127.0.0.1:550/html/program.html");
            
         },
         error(jqXHR, textStatus, errorThrown) {
