@@ -1,6 +1,6 @@
 $(function () {
     if(!isLogin()){
-        window.location.replace("http://127.0.0.1:5500/DepartmentManagement/html/login.html");
+        window.location.replace("http://127.0.0.1:5500/html/login.html");
   
     }
     $(".header").load("header.html",function(){
@@ -962,7 +962,7 @@ function getListAccounts() {
         },
         error(jqXHR, textStatus, errorThrown) {
             if (jqXHR.status == 403) {
-                window.location.href = "http://127.0.0.1:5500/DepartmentManagement/html/forbidden.html";
+                window.location.href = "http://127.0.0.1:5500/html/forbidden.html";
             }
             console.log(jqXHR);
             console.log(textStatus);
